@@ -80,6 +80,34 @@
       // existing user projects that might rely on the earlier manual
       // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
       // expected to change.
+      let gyroX = 0;
+      let gyroY = 0;
+      let gyroZ = 0;
+
+      function EnableGyroscope() {
+        if (window.DeviceOrientationEvent) {
+          window.addEventListener("deviceorientation", function(event) {
+            gyroX = event.beta;  // Rotation around X-axis
+            gyroY = event.gamma; // Rotation around Y-axis
+            gyroZ = event.alpha; // Rotation around Z-axis
+          }, true);
+        } else {
+          console.log("DeviceOrientation is not supported");
+        }
+      }
+
+      function GetGyroX() {
+        return gyroX;
+      }
+
+      function GetGyroY() {
+        return gyroY;
+      }
+
+      function GetGyroZ() {
+        return gyroZ;
+      }
+
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
